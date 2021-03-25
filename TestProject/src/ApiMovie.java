@@ -14,6 +14,7 @@ import org.omg.CORBA.portable.InputStream;
 public class ApiMovie extends Thread{
 
     public final static String apiURL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+    public final static String movieURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json";
     public final static String KEY = "ca902f2712bf92fc02cbedd133e32606";
     public static String today;
 
@@ -76,17 +77,23 @@ public class ApiMovie extends Thread{
     }
 
     private static void parseData(String responseBody) {
-        String title;
+		
+    	String title, openDt, movieCd;
+		 
+    	//String key,movi
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(responseBody.toString());
             JSONObject jsonObject1 = (JSONObject) jsonObject.get("boxOfficeResult");
             JSONArray jsonArray = jsonObject1.getJSONArray("dailyBoxOfficeList");
+            //jsonArray = jsonObject.getJSONArray("")
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject item = jsonArray.getJSONObject(i);
                 title = item.getString("movieNm");
-                System.out.println("movieNm : " + title);
+                openDt = item.getString("openDt");
+                movieCd = item.getString("movieCd");
+                System.out.println("movieNm : " + title+"\nopen_day : "+openDt+"\nmovieCd : "+movieCd);
             }
         } catch (JSONException e) {
             e.printStackTrace();

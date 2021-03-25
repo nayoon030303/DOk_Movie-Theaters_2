@@ -9,12 +9,14 @@ public class MainClass {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd",Locale.KOREA);
 		Calendar calendar = Calendar.getInstance();
 		/*today의 한달전*/
-		calendar.add(Calendar.MONTH, -2);
+		calendar.add(Calendar.MONTH, -1);
 		String today = sdf.format(calendar.getTime()).toString();
 		
 		/*Test*/
 		System.out.println(today);
-		ApiMovie apiMovie = new ApiMovie(today);
+		//ApiMovie apiMovie = new ApiMovie(today);
+		String code = "20200703";
+		APIMovie_info apiMovie = new APIMovie_info(code);
 		apiMovie.start();
 	}
 

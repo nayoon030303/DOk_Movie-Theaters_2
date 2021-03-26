@@ -22,7 +22,7 @@ import User.User;
 import page.CategoryFrame;
 import page.Main;
 import page.ReservationCheckPage;
-import ticket.Ticket;
+import reservation.Ticket;
 
 public class MovieSitPage extends CategoryFrame implements Runnable {
 	private final static int PaddingLeft = 150;

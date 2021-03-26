@@ -1,19 +1,19 @@
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.omg.CORBA.portable.InputStream;
 
 public class ApiMovie extends Thread{
 
-    public final static String apiURL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+	public final static String apiURL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
     public final static String movieURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json";
     public final static String KEY = "ca902f2712bf92fc02cbedd133e32606";
     public static String today;
@@ -100,3 +100,4 @@ public class ApiMovie extends Thread{
         }
     }
 }
+    

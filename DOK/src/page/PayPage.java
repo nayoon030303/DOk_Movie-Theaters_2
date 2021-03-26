@@ -27,7 +27,7 @@ import Movie.MovieArea;
 import User.User;
 import page.CategoryFrame.windowAdapter;
 import page.MyPage.BtnEvent;
-import ticket.Ticket;
+import reservation.Ticket;
 
 public class PayPage extends JFrame implements ActionListener, Runnable {
 	private final static int PaddingLeft = 50;

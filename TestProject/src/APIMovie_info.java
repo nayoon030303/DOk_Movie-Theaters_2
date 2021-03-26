@@ -85,9 +85,9 @@ public class APIMovie_info extends Thread {
 	            JSONObject jsonObject1 = (JSONObject) jsonObject.get("movieInfoResult");
 	            JSONObject jsonObject2 = jsonObject1.getJSONObject("movieInfo");
 	            String obj = jsonObject2.getString("movieNm");
-	            System.out.println(jsonObject1);
-	            System.out.println(jsonObject2);
+	            genreNm = jsonObject2.getString("genres");
 	            System.out.println(obj);
+	            System.out.println(genreNm);
 				/*
 				 * JSONObject jsonObject1 = (JSONObject) jsonObject.get("boxOfficeResult");
 				 * JSONArray jsonArray = jsonObject1.getJSONArray("dailyBoxOfficeList");

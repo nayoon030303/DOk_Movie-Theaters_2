@@ -20,10 +20,10 @@ import Movie.DB_MovieInfo;
 import Movie.Movie;
 import Movie.MovieArea;
 import User.User;
+import reservation.DB_ticket;
+import reservation.Ticket;
 import theater.DB_Theater;
 import theater.Theater;
-import ticket.DB_ticket;
-import ticket.Ticket;
 
 
 public class MyPage extends CategoryFrame{

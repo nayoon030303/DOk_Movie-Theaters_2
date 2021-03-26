@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 
 import Movie.MovieArea;
 import User.User;
-import ticket.Ticket;
+import reservation.Ticket;
 
 class Timer2 extends Thread {
 	private JFrame frame;

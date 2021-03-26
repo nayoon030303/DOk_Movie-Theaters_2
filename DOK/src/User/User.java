@@ -2,8 +2,8 @@ package User;
 
 
 public class User {
-	private String userID, userPassword, userName, useryymmdd, userGender, userPhone, userTaste1;
-	private boolean isLogin;
+	private String userID, userPassword, userName, userYYMMDD, userGender, userPhone, userTaste1;
+	private boolean userIsLogin;
 	private String userProfile;
 	public User() {}
 	//8°¡Áö
@@ -11,11 +11,11 @@ public class User {
 		this.userID = userID;
 		this.userPassword = userPassword;
 		this.userName = userName;
-		this.useryymmdd = useryymmdd;
+		this.userYYMMDD = useryymmdd;
 		this.userGender = userGender;
 		this.userPhone = userPhone;
 		this.userTaste1 = userTaste1;
-		this.isLogin = isLogin;
+		this.userIsLogin = isLogin;
 	}
 	public String getUserID() {
 		return userID;
@@ -36,10 +36,10 @@ public class User {
 		this.userName = userName;
 	}
 	public String getUseryymmdd() {
-		return useryymmdd;
+		return userYYMMDD;
 	}
 	public void setUseryymmdd(String useryymmdd) {
-		this.useryymmdd = useryymmdd;
+		this.userYYMMDD = useryymmdd;
 	}
 	public String getUserGender() {
 		return userGender;
@@ -60,10 +60,10 @@ public class User {
 		this.userTaste1 = userTaste1;
 	}
 	public boolean getUserIsLogin() {
-		return isLogin;
+		return userIsLogin;
 	}
 	public void setUserIsLogin(boolean isLogin) {
-		this.isLogin = isLogin;
+		this.userIsLogin = isLogin;
 	}
 	public String getUserProfile() {
 		return userProfile;

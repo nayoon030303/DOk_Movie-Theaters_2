@@ -4,17 +4,19 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Movie.DB_MovieInfo;
+import API.API_DailyBoxOffice;
 import Movie.Movie;
 import User.User;
-import page.CategoryFrame.categoryEvent;
+
 
 public class DOKPage extends CategoryFrame {
    //pos
@@ -35,8 +37,10 @@ public class DOKPage extends CategoryFrame {
    private ImageIcon imgBoxoffice = new ImageIcon("src/imges/boxoffice.png");
    private ImageIcon imgNew = new ImageIcon("src/img/new.png");
    
-   //DB
-   private DB_MovieInfo moive_connect = new DB_MovieInfo();
+   //API
+   private API_DailyBoxOffice dailyMovie = new API_DailyBoxOffice(getToday());
+   
+   //private Thread td = new Thread(dailyMovie);
    
    //Font
    private Font font1 = new Font("나눔바른고딕", Font.PLAIN, 20); 
@@ -50,10 +54,11 @@ public class DOKPage extends CategoryFrame {
       //setDefaultCloseOperation(EXIT_ON_CLOSE);
       getContentPane().setLayout(null);//레이아웃 null
       setVisible(true);
+     
       
-
-   
-      
+      dailyMovie.start();
+      movies = dailyMovie.getMovies();
+      System.out.println(movies[0].getM_name());
       this.user = user;
       
       //만약 로그인 되어있다면
@@ -102,20 +107,18 @@ public class DOKPage extends CategoryFrame {
       plusMovie.addActionListener(new DOKListener());
       panel.add(plusMovie);
       
-      movies = moive_connect.getMovieInfoAll("open_day");
+      //movies = moive_connect.getMovieInfoAll("open_day");
       
-      //영화 차트 버튼
-      for(int i=0; i<movieN; i++) {
+      //영화 차트 
+      /*for(int i=0; i<movieN; i++) {
          int x = 300*(i)+ 180;
-         String src = "src/imges/"+movies[i].get_key()+"H.jpg";
-         //System.out.println(src);
-         imgPoster[i] = new ImageIcon(src);
-         //imgPoster[i] = new ImageIcon("src/imges/겨울 왕국.jpg");
+         String src = "src/imges/"+movies[i].get_key()+"H.jpg";      
+         imgPoster[i] = new ImageIcon(src);     
          moviePoster[i] = new JLabel(imgPoster[i]);
          moviePoster[i].setIcon(imgPoster[i]);
          moviePoster[i].setBounds(x, 250, 255, 363);
          panel.add(moviePoster[i]);
-      }
+      }*/
       
       iconNew.setIcon(imgNew);
       iconNew.setBounds(350, 195, 100, 50);
@@ -123,10 +126,11 @@ public class DOKPage extends CategoryFrame {
       iconNew.setBackground(Color.WHITE);
       panel.add(iconNew);
       
+      //movie_name
       for(int i = 0; i < movieName.length; i++) {
          int x = 300*(i)+ 180;
          movieName[i] = new JLabel(movies[i].getM_name());
-         movieName[i].setBounds(x, 650, 250, 30);
+         movieName[i].setBounds(x, 600, 250, 30);
          movieName[i].setFont(font3);
          movieName[i].setHorizontalAlignment(JLabel.CENTER);
          panel.add(movieName[i]);
@@ -140,6 +144,14 @@ public class DOKPage extends CategoryFrame {
       
    }
    
+   public static String getToday(){
+	   SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd",Locale.KOREA);
+		Calendar calendar = Calendar.getInstance();
+		/*today의 한달전*/
+		calendar.add(Calendar.MONTH, -1);
+		String today = sdf.format(calendar.getTime()).toString();
+		return today;
+   }
    class DOKListener implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {

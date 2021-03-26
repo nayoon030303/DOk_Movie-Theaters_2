@@ -30,10 +30,10 @@ public class DB_userInfo {
 	
 	
 	//데이터 베이스에 user정보 추가
-	public boolean addUser(String userID, String userPassword, String userName, String useryymmdd, String userGender, String userPhone , String userTaste1 ) {
+	public boolean addUser(String userID, String userPassword, String userName, String userYYMMDD, String userGender, String userPhone , String userTaste1 ) {
 		try {
-			String SQL = "INSERT INTO USER (userID, userPassword, userName, useryymmdd, userGender,userPhone, userTaste1) "
-					+ "VALUES(\""+userID+"\"," +"\""+ userPassword+"\"," + "\""+userName+"\",\"" + useryymmdd+"\",\""+userGender +"\","+ "\""+userPhone +"\","+ "\""+userTaste1+"\");";
+			String SQL = "INSERT INTO USER (userID, userPassword, userName, userYYMMDD, userGender,userPhone, userTaste1) "
+					+ "VALUES(\""+userID+"\"," +"\""+ userPassword+"\"," + "\""+userName+"\",\"" + userYYMMDD+"\",\""+userGender +"\","+ "\""+userPhone +"\","+ "\""+userTaste1+"\");";
 			
 			int success = st.executeUpdate(SQL);
 				
@@ -71,8 +71,7 @@ public class DB_userInfo {
 	}
 	public boolean isLogin(String userID) {
 		try {
-			String SQL = "SELECT * FROM user WHERE userID = \"" + userID+ "\" and isLogin = false;";
-			//System.out.println(SQL);
+			String SQL = "SELECT * FROM user WHERE userID = \"" + userID+ "\" and userIsLogin = false;";
 			rs = st.executeQuery(SQL);
 			
 			//일치
@@ -99,11 +98,11 @@ public class DB_userInfo {
 				user.setUserID(rs.getString("userID"));
 				user.setUserPassword(rs.getString("userPassword"));
 				user.setUserName(rs.getString("userName"));
-				user.setUseryymmdd(rs.getString("useryymmdd"));
+				user.setUseryymmdd(rs.getString("userYYMMDD"));
 				user.setUserGender(rs.getString("userGender"));
 				user.setUserPhone(rs.getString("userPhone"));
 				user.setUserTaste1(rs.getString("userTaste1"));
-				user.setUserIsLogin(rs.getBoolean("isLogin"));
+				user.setUserIsLogin(rs.getBoolean("userIsLogin"));
 				user.setUserProfile(rs.getString("userProfile"));
 			//불일치
 			}else {
@@ -157,7 +156,7 @@ public class DB_userInfo {
 	//종료시 로그아웃 false
 	public void updateIsLogout(String userID) {
 		try {
-			String SQL = "UPDATE user SET isLogin = false  WHERE userID = \""+userID+"\";";
+			String SQL = "UPDATE user SET userIsLogin = false  WHERE userID = \""+userID+"\";";
 			//System.out.println(SQL);
 			int success = st.executeUpdate(SQL);
 			
@@ -177,7 +176,7 @@ public class DB_userInfo {
 	//로그인시 true
 	public void updateIsLogin(String userID) {
 		try {
-			String SQL = "UPDATE user SET isLogin = true  WHERE userID = \""+userID+"\";";
+			String SQL = "UPDATE user SET userIsLogin = true  WHERE userID = \""+userID+"\";";
 			//System.out.println(SQL);
 			int success = st.executeUpdate(SQL);
 			

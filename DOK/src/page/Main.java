@@ -10,7 +10,8 @@ public class Main {
 	static User user = new User();
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new LoadingPage(user);
+		//new LoadingPage(user);
+		 new DOKPage(user);
 	}
 
 }

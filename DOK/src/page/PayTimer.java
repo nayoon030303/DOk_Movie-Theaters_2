@@ -18,8 +18,8 @@ import javax.swing.JPanel;
 import Movie.DB_MovieArea;
 import Movie.MovieArea;
 import User.User;
-import ticket.DB_ticket;
-import ticket.Ticket;
+import reservation.DB_ticket;
+import reservation.Ticket;
 
 public class PayTimer extends JFrame {
 	private JPanel panel = new JPanel();

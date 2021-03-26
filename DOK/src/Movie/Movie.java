@@ -6,7 +6,7 @@ public class Movie {
 	public static final int TEEN = 8000;
 	public static final int KIDS = 5000;
 	
-	private int _key;
+	private String _key;
 	private String m_name, genre, open_day;
 	private int audience;
 	private double rating;
@@ -16,7 +16,7 @@ public class Movie {
 	private String disributor;
 	public Movie() {}
 
-	public Movie(int _key, String m_name, String genre, String open_day, int audience, double rating) {
+	public Movie(String _key, String m_name, String genre, String open_day, int audience, double rating) {
 		this._key = _key;
 		this.m_name = m_name;
 		this.genre = genre;
@@ -25,12 +25,12 @@ public class Movie {
 		this.rating = rating;
 	}
 
-	public int get_key() {
+	public String get_key() {
 		return _key;
 	}
 
-	public void set_key(int _key) {
-		this._key = _key;
+	public void set_key(String string) {
+		this._key = string;
 	}
 
 	public String getM_name() {

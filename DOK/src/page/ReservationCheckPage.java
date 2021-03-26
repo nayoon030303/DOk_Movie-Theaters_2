@@ -22,7 +22,7 @@ import Movie.Movie;
 import Movie.MovieArea;
 import User.User;
 import page.CategoryFrame.windowAdapter;
-import ticket.Ticket;
+import reservation.Ticket;
 
 public class ReservationCheckPage extends JFrame implements ActionListener, Runnable {
    private final static int PaddingLeft = 50;

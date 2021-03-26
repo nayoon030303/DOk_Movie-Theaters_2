@@ -1,4 +1,4 @@
-package ticket;
+package reservation;
 
 public class Ticket {
 	private int _key;

@@ -240,9 +240,9 @@ public class ChartPage extends CategoryFrame implements ActionListener, MouseLis
       }else if(e.getSource()==audience) {
          calumn = "audience";
       }else if(e.getSource()==openday) {
-         calumn = "open_day";
+         calumn = "movieOpenDay";
       }else if(e.getSource()==ganada) {
-         calumn ="m_name";
+         calumn ="movieName";
       }else {
          calumn = "rating";
       }

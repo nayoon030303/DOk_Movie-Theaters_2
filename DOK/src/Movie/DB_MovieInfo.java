@@ -43,9 +43,10 @@ public class DB_MovieInfo {
 
 				movies[n] = new Movie();
 				movies[n].set_key(rs.getInt("_key"));
-				movies[n].setM_name(rs.getString("m_name"));
-				movies[n].setGenre(rs.getString("genre"));
-				movies[n].setOpen_day(rs.getString("open_day"));
+				movies[n].setM_name(rs.getString("movieName"));
+				movies[n].setGenre(rs.getString("movieGenre"));
+				
+				movies[n].setOpen_day(rs.getString("movieOpenDay"));
 				movies[n].setAudience(rs.getInt("audience"));
 				movies[n].setRating(rs.getDouble("rating"));
 				movies[n].setGrade(rs.getString("grade"));
@@ -72,7 +73,7 @@ public class DB_MovieInfo {
 			while (rs.next()) {
 				
 				movie = new Movie();
-				movie.setM_name(rs.getString("m_name"));
+				movie.setM_name(rs.getString("movieName"));
 			}
 
 		} catch (Exception e) {
@@ -85,7 +86,7 @@ public class DB_MovieInfo {
 	public Movie[] getMovieInfo(String genr, String calum) {
 
 		try {
-			String SQL = "select* from movie where genre like '" + genr + "' order by " + calum + " desc";
+			String SQL = "select* from movie where movieGenre like '" + genr + "' order by " + calum + " desc";
 			// System.out.println(SQL);
 			rs = st.executeQuery(SQL);
 			int n = 0;
@@ -100,9 +101,9 @@ public class DB_MovieInfo {
 
 				movies[n] = new Movie();
 				movies[n].set_key(rs.getInt("_key"));
-				movies[n].setM_name(rs.getString("m_name"));
-				movies[n].setGenre(rs.getString("genre"));
-				movies[n].setOpen_day(rs.getString("open_day"));
+				movies[n].setM_name(rs.getString("movieName"));
+				movies[n].setGenre(rs.getString("movieGenre"));
+				movies[n].setOpen_day(rs.getString("movieOpenDay"));
 				movies[n].setAudience(rs.getInt("audience"));
 				movies[n].setRating(rs.getDouble("rating"));
 				movies[n].setGrade(rs.getString("grade"));

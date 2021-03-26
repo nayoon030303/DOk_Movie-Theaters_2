@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import Area.DB_Area;
-import Movie.DB_MovieArea;
+import Area.DB_MovieTimeTable;
 import Movie.DB_MovieInfo;
 import Movie.Movie;
 import Movie.MovieArea;
@@ -67,7 +67,7 @@ public class MyPage extends CategoryFrame{
 
 	//DB
 	private DB_ticket connect_ticket = new DB_ticket();
-	private DB_MovieArea connect_movieArea = new DB_MovieArea();
+	private DB_MovieTimeTable connect_movieArea = new DB_MovieTimeTable();
 	private DB_Theater coneect_theater = new DB_Theater();
 	private DB_MovieInfo connect_movie  = new DB_MovieInfo();
 	

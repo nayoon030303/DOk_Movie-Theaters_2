@@ -15,7 +15,7 @@ public class Test1 {
 	static User user = new User();
 
 	public static void main(String[] args) {
-		DB_MovieArea connect = new DB_MovieArea(); 
+		DB_MovieTimeTable connect = new DB_MovieTimeTable(); 
 		
 		
 		

@@ -86,7 +86,7 @@ public class Reservation_start_page extends CategoryFrame implements ActionListe
 	private JLabel noSchedule = new JLabel();
 	// DB
 	private DB_MovieInfo movie_connect = new DB_MovieInfo();
-	private DB_MovieArea moviearea_connect = new DB_MovieArea();
+	private DB_MovieTimeTable moviearea_connect = new DB_MovieTimeTable();
 	private DB_Theater theater_connect = new DB_Theater();
 	private DB_Area area_connect = new DB_Area();
 

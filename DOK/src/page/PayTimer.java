@@ -42,7 +42,7 @@ public class PayTimer extends JFrame {
 	
 	// DB
 	private DB_ticket connect_ticket = new DB_ticket();
-	private DB_MovieArea connect_movieArea = new DB_MovieArea();
+	private DB_MovieTimeTable connect_movieArea = new DB_MovieTimeTable();
 
 	// Design
 	private Font font1 = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 35);

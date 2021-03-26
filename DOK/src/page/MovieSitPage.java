@@ -75,7 +75,7 @@ public class MovieSitPage extends CategoryFrame implements Runnable {
 	private Font people = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 25);
 
 	// DB
-	private DB_MovieArea connect_movieArea = new DB_MovieArea();
+	private DB_MovieTimeTable connect_movieArea = new DB_MovieTimeTable();
 
 	public MovieSitPage(User user, MovieArea pre_movieArea, String yymmdd) {
 		super("¿µÈ­ ÁÂ¼® ¼±ÅÃ");

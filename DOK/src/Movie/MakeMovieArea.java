@@ -47,7 +47,7 @@ public class MakeMovieArea {
 		
 		
 		DB_MovieInfo movieInfo_connect = new DB_MovieInfo();
-		DB_MovieArea movieArea_connect = new DB_MovieArea();
+		DB_MovieTimeTable movieArea_connect = new DB_MovieTimeTable();
 		DB_Theater theater_connect = new DB_Theater();
 		
 		THEATER_NUM = theater_connect.countTheater();	//±ØÀå ¼ö

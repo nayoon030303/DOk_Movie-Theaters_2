@@ -39,7 +39,7 @@ public class API_DailyBoxOffice extends API  {
                 JSONObject item = jsonArray.getJSONObject(i);
                 movies[i] = new Movie();
                 movies[i].setM_name(item.getString("movieNm")); 
-                movies[i].set_key(item.getString("movieNm"));
+                movies[i].set_key(Integer.parseInt(item.getString("movieCd")));
                 movies[i].setOpen_day(item.getString("openDt"));
                 movies[i].setAudience(Integer.parseInt(item.getString("audiAcc")));
                 //System.out.println(movies[i].getM_name());

@@ -13,7 +13,7 @@ public class DB_reservation {
 	private Connection con;
 	private Statement st;
 	private ResultSet rs;
-	private Reservation ticket;
+	private Reservation reservation;
 	private Vector<Reservation> tickets = new Vector<Reservation>();
 		
 	public DB_reservation() {
@@ -48,24 +48,25 @@ public class DB_reservation {
 		return false;
 	}
 	
-	public Vector<Reservation>  getTicket(String userID) {
+	public Vector<Reservation>  getReservations(String userID) {
 		try {
 			tickets.clear();
-			String SQL = "select* from reservation where resUserID like \""+userID+"\" order by resYYMMDD desc";
+			String SQL = "select* from reservation where resUserID like \""+userID+"\" order by resYYMMDD DESC";
 			//System.out.println(SQL);
 			rs = st.executeQuery(SQL);
 
 			while (rs.next()) {
-				ticket = new Reservation();
-				ticket.set_key(rs.getInt("res_key"));
-				ticket.setMovieTimetable(rs.getInt("res_MovieTimeKey"));
-				ticket.setPrice(rs.getInt("resPrice"));
-				ticket.setSeatCount(rs.getInt("resSeatCount"));
-				ticket.setSeatWhere(rs.getString("resSeatWhere"));
-				ticket.setYymmdd(rs.getString("resYYMMDD"));
-				ticket.setPayHow(rs.getString("resPayHow"));
+				reservation = new Reservation();
+				reservation.set_key(rs.getInt("res_key"));
+				reservation.setMovieTimetable(rs.getInt("res_MovieTimeKey"));
+				reservation.setPrice(rs.getInt("resPrice"));
+				reservation.setSeatCount(rs.getInt("resSeatCount"));
+				reservation.setSeatWhere(rs.getString("resSeatWhere"));
+				reservation.setYymmdd(rs.getString("resYYMMDD"));
+				reservation.setPayHow(rs.getString("resPayHow"));
+				reservation.setMoiveYYMMDD(rs.getString("resMovieYYMMDD"));
 			
-				tickets.add(ticket);
+				tickets.add(reservation);
 			}
 
 		} catch (Exception e) {

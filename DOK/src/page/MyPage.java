@@ -38,7 +38,6 @@ public class MyPage extends CategoryFrame{
 
 	
 	//component
-	
 	private JPanel panel = new JPanel();
 	private JLabel profile_img = new JLabel();
 	private JLabel name = new JLabel();
@@ -58,15 +57,10 @@ public class MyPage extends CategoryFrame{
 	private JLabel[] resMovieInfo = new JLabel[4];
 	private JLabel[] resMovieState = new JLabel[4];
 	
-	
-	
-	private Vector<Reservation> reseravations = new Vector<Reservation>();
-	
-
 	//Design
 	private Font font1 = new Font("휴먼둥근헤드라인", Font.PLAIN, 25);
 	private Font font2 = new Font("휴먼둥근헤드라인", Font.PLAIN, 15);
-
+	
 	private ImageIcon imgInfo = new ImageIcon("src/imges/info.png");
 	private ImageIcon imgRecord = new ImageIcon("src/imges/record.png");
 	private ImageIcon imgReInfo = new ImageIcon("src/imges/re_info.png");
@@ -83,6 +77,8 @@ public class MyPage extends CategoryFrame{
 	
 	private Movie movie;
 	private MovieTimtTable movieTimetable;
+	private int MAX = 3;
+	private Vector<Reservation> reseravations = new Vector<Reservation>();
 	
 	//text
 	private String[] texts = {"예매일","상품명","이용일 / 매수","현재 상태"};
@@ -98,7 +94,7 @@ public class MyPage extends CategoryFrame{
 		
 		
 		
-		reseravations = connect_reservation.getTicket(user.getUserID());
+		reseravations = connect_reservation.getReservations(user.getUserID());
 		this.user = user;
 		
 		//프로필 사진
@@ -208,12 +204,14 @@ public class MyPage extends CategoryFrame{
 		
 		if(reseravations.size()>0) {
 			int num = reseravations.size();
-			if(reseravations.size()>4) {
+			
+			if(reseravations.size()>MAX) {
 				num = 4;
 			}else{
-				num = reseravations.size();
+				num = reseravations.size()+1;
 			}
-			for(int y=0; y<num; y++) {
+			for(int y=0; y<3; y++) {
+				System.out.println(num);
 				for(int x=0; x<recent_movieInfo[y].length; x++){
 					//기본 설정
 					recent_movieInfo[y][x] = new JLabel("aa");
@@ -245,15 +243,15 @@ public class MyPage extends CategoryFrame{
 					
 				    if(y!=0)
 				    {
-				    	int movieTimetableKey = reseravations.get(y-1).getMovieTimetable();
+				    	int number = y-1;
+				    	int movieTimetableKey = reseravations.get(number).getMovieTimetable();
 					    movieTimetable = connect_movieTimetable.getMovieArea(movieTimetableKey);
 					    int movieKey = movieTimetable.getMovieKey();
 					    movie = connect_movie.getMovie(movieKey); String yymmdd, movieName,movieYYMMDD,seatCount;
 					    //예매일	상품명	이용일/매수		현재상태  
-					    yymmdd = reseravations.get(y-1).getYymmdd();
+					    yymmdd = reseravations.get(number).getYymmdd();
 					    movieName = movie.getM_name();
-					    movieYYMMDD = reseravations.get(2).getMoiveYYMMDD();
-					    System.out.println(movieYYMMDD);
+					    movieYYMMDD = reseravations.get(number).getMoiveYYMMDD();				
 					    seatCount =	Integer.toString(reseravations.get(y-1).getSeatCount());
 					    
 					    if(x==0){
@@ -265,9 +263,7 @@ public class MyPage extends CategoryFrame{
 					    }else if(x==3) {
 					    	recent_movieInfo[y][x].setText(movieYYMMDD+"\n"+"aa");
 					    }
-					    
-					    
-					    					    
+					    					    					    
 				    }
 				    
 						

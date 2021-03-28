@@ -35,7 +35,7 @@ import Area.DB_Area;
 import Movie.DB_MovieTimeTable;
 import Movie.DB_MovieInfo;
 import Movie.Movie;
-import Movie.MovieArea;
+import Movie.MovieTimtTable;
 import User.User;
 import page.CategoryFrame;
 import page.DOKPage;
@@ -92,8 +92,8 @@ public class Reservation_start_page extends CategoryFrame implements ActionListe
 
 	//
 	private Movie[] movie;
-	private Vector<MovieArea> movieAreas = new Vector<MovieArea>();
-	private Vector<MovieArea> movieAreass = new Vector<MovieArea>();
+	private Vector<MovieTimtTable> movieAreas = new Vector<MovieTimtTable>();
+	private Vector<MovieTimtTable> movieAreass = new Vector<MovieTimtTable>();
 	private Theater[] theater;
 	private Area[] area;
 	private String movieName;
@@ -110,7 +110,7 @@ public class Reservation_start_page extends CategoryFrame implements ActionListe
 	private boolean isReset = false;
 	private boolean isNextDay = false;
 
-	private String yymmdd = null;
+	private String movie_yymmdd = null;
 	private String str = null;
 	 
 
@@ -140,6 +140,7 @@ public class Reservation_start_page extends CategoryFrame implements ActionListe
 	Font boldfont = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 20);
 	Font font1 = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 25);
 	Font font2 = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 20);
+
 
 	public Reservation_start_page() {
 	}
@@ -463,9 +464,10 @@ public class Reservation_start_page extends CategoryFrame implements ActionListe
 				for (int i = 0; i < content.length; i++) {
 					if (e.getSource() == content[i]) {
 						//ÆäÀÌÁö ³Ñ¾î°¨
-						yymmdd = checkYear+"."+checkMonth+"."+checkDay;
+						movie_yymmdd = checkYear+"."+checkMonth+"."+checkDay;
+						//content[i].setY(yymmdd);						
 						//System.out.println(yymmdd);
-						MovieSitPage mpage = new MovieSitPage(user, content[i].getMovieArea(), yymmdd);
+						MovieSitPage mpage = new MovieSitPage(user, content[i].getMovieArea(), movie_yymmdd);
 						Thread t1 = new Thread(mpage);
 						t1.start();
 						startRunReservation_start = false;
@@ -695,15 +697,16 @@ class JKeyButton extends JButton {
 	private int month;
 	private int day;
 	private String dayofweek;
+	private String YYMMDD;
 
-	private MovieArea movieArea;
+	private MovieTimtTable movieTimetable;
 
-	public MovieArea getMovieArea() {
-		return movieArea;
+	public MovieTimtTable getMovieArea() {
+		return movieTimetable;
 	}
 
-	public void setMovieArea(MovieArea movieArea) {
-		this.movieArea = movieArea;
+	public void setMovieArea(MovieTimtTable movieArea) {
+		this.movieTimetable = movieArea;
 	}
 
 	public JKeyButton() {
@@ -761,5 +764,14 @@ class JKeyButton extends JButton {
 	public void setDayofweek(String dayofweek) {
 		this.dayofweek = dayofweek;
 	}
+
+	public String getYYMMDD() {
+		return YYMMDD;
+	}
+
+	public void setYYMMDD(String yYMMDD) {
+		YYMMDD = yYMMDD;
+	}
+	
 
 }

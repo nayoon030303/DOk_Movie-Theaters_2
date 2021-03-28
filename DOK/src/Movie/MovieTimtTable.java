@@ -1,6 +1,6 @@
 package Movie;
 
-public class MovieArea {
+public class MovieTimtTable {
 	private int _key;
 	private int area_key;
 	private String hall;
@@ -9,8 +9,10 @@ public class MovieArea {
 	private int movieKey;
 	private int vacantSeat;
 	private String seatState;
-	public MovieArea() {}
-	public MovieArea(int _key, int area_key, String hall, int weeks, String startTime, int movieKey, int vacantSeat,
+	private String YYMMDD;
+	
+	public MovieTimtTable() {}
+	public MovieTimtTable(int _key, int area_key, String hall, int weeks, String startTime, int movieKey, int vacantSeat,
 			String seatState) {
 		super();
 		this._key = _key;
@@ -21,6 +23,20 @@ public class MovieArea {
 		this.movieKey = movieKey;
 		this.vacantSeat = vacantSeat;
 		this.seatState = seatState;
+	}
+	
+	public MovieTimtTable(int _key, int area_key, String hall, int weeks, String startTime, int movieKey, int vacantSeat,
+			String seatState, String yYMMDD) {
+		super();
+		this._key = _key;
+		this.area_key = area_key;
+		this.hall = hall;
+		this.weeks = weeks;
+		this.startTime = startTime;
+		this.movieKey = movieKey;
+		this.vacantSeat = vacantSeat;
+		this.seatState = seatState;
+		YYMMDD = yYMMDD;
 	}
 	public int get_key() {
 		return _key;
@@ -70,7 +86,12 @@ public class MovieArea {
 	public void setSeatState(String seatState) {
 		this.seatState = seatState;
 	}
-	
+	public String getYYMMDD() {
+		return YYMMDD;
+	}
+	public void setYYMMDD(String yYMMDD) {
+		YYMMDD = yYMMDD;
+	}
 	
 	
 }

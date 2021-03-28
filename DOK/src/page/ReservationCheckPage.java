@@ -19,10 +19,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Movie.Movie;
-import Movie.MovieArea;
+import Movie.MovieTimtTable;
 import User.User;
 import page.CategoryFrame.windowAdapter;
-import reservation.Ticket;
+import reservation.Reservation;
 
 public class ReservationCheckPage extends JFrame implements ActionListener, Runnable {
    private final static int PaddingLeft = 50;
@@ -46,9 +46,9 @@ public class ReservationCheckPage extends JFrame implements ActionListener, Runn
    //ÀÌ¹ÌÁö
    private ImageIcon imgSure = new ImageIcon("src/img/check.png");
    
-   private Ticket ticket;
+   private Reservation ticket;
    private User user;
-   private MovieArea movieArea;
+   private MovieTimtTable movieArea;
    int resultPrice;
    
    
@@ -58,7 +58,7 @@ public class ReservationCheckPage extends JFrame implements ActionListener, Runn
    Font plain_font = new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 20);
    Font result_font = new Font("³ª´®¹Ù¸¥°íµñ", Font.BOLD, 30);
    
-   public ReservationCheckPage(User user,MovieArea movieArea,Ticket ticket,int num_adult, int num_teen, int num_kids) {
+   public ReservationCheckPage(User user,MovieTimtTable movieArea,Reservation ticket,int num_adult, int num_teen, int num_kids) {
       
 	   setIconImage(img);
 	   

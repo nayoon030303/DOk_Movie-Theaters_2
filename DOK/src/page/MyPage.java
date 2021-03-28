@@ -18,10 +18,10 @@ import Area.DB_Area;
 import Area.DB_MovieTimeTable;
 import Movie.DB_MovieInfo;
 import Movie.Movie;
-import Movie.MovieArea;
+import Movie.MovieTimtTable;
 import User.User;
-import reservation.DB_ticket;
-import reservation.Ticket;
+import reservation.DB_reservation;
+import reservation.Reservation;
 import theater.DB_Theater;
 import theater.Theater;
 
@@ -50,7 +50,7 @@ public class MyPage extends CategoryFrame{
 	private JLabel record_movie = new JLabel();
 	private JLabel record_movieInfo = new JLabel();
 	private JLabel[] recent_movieInfo = new JLabel[4];
-	private Vector<Ticket> tickets = new Vector<Ticket>();
+	private Vector<Reservation> reseravations = new Vector<Reservation>();
 	
 	
 	//Design
@@ -66,7 +66,7 @@ public class MyPage extends CategoryFrame{
 	private Color purple = new Color(82, 12, 139);
 
 	//DB
-	private DB_ticket connect_ticket = new DB_ticket();
+	private DB_reservation connect_reservation = new DB_reservation();
 	private DB_MovieTimeTable connect_movieArea = new DB_MovieTimeTable();
 	private DB_Theater coneect_theater = new DB_Theater();
 	private DB_MovieInfo connect_movie  = new DB_MovieInfo();
@@ -83,7 +83,7 @@ public class MyPage extends CategoryFrame{
 		
 		
 		
-		tickets = connect_ticket.getTicket(user.getUserID());
+		reseravations = connect_reservation.getTicket(user.getUserID());
 		this.user = user;
 		
 		//프로필 사진
@@ -174,18 +174,24 @@ public class MyPage extends CategoryFrame{
 		panel.setLayout(null);
 		add(panel);
 		
-		if(tickets.size()>0) {
+		if(reseravations.size()>0) {
 			int num =0;
-			if(tickets.size()>4) {
+			if(reseravations.size()>4) {
 				num = 4;
 			}else{
-				num = tickets.size();
+				num = reseravations.size();
 			}
 			for(int i=0; i<num; i++) {
 				recent_movieInfo[i] = new JLabel();
 				recent_movieInfo[i].setBorder(new LineBorder(purple, 1));
+				recent_movieInfo[i].setBorder(new LineBorder(purple, 1));
 				recent_movieInfo[i].setBackground(Color.red);
 				recent_movieInfo[i].setBounds(POS_X_CENTER - 50, PaddingTop+300+(250/4)*(i+1)+3, 650, 250/4);
+				panel.add(recent_movieInfo[i]);
+				
+				String yymmdd, movieName, seatCount;
+				int movieTimeKey = reseravations.get(i).getMovieareaKey();
+				/*
 				String yymmdd,movieName,area,country,startTime,hall;
 				int a = tickets.get(i).getMovieareaKey();
 				MovieArea movieArea = connect_movieArea.getMovieArea(a);
@@ -200,6 +206,7 @@ public class MyPage extends CategoryFrame{
 				hall = movieArea.getHall();
 				recent_movieInfo[i].setText("<html>" +yymmdd+"&nbsp;&nbsp;&nbsp;&nbsp;"+ movieName+"&nbsp;&nbsp;&nbsp;&nbsp;"+area + "&nbsp;&nbsp;" + country+"&nbsp;&nbsp;"+hall+"</html>");
 				panel.add(recent_movieInfo[i]);
+			*/
 			}
 		}else {
 			record_movieInfo.setText("아직 최근 예매하신 내역이 없으시네요 !");

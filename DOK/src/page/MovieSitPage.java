@@ -17,12 +17,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Movie.DB_MovieTimeTable;
-import Movie.MovieArea;
+import Movie.MovieTimtTable;
 import User.User;
 import page.CategoryFrame;
 import page.Main;
 import page.ReservationCheckPage;
-import reservation.Ticket;
+import reservation.Reservation;
 
 public class MovieSitPage extends CategoryFrame implements Runnable {
 	private final static int PaddingLeft = 150;
@@ -64,11 +64,11 @@ public class MovieSitPage extends CategoryFrame implements Runnable {
 	private int count = 0;
 	private int selectCount = 0;
 	private boolean isCountStart = false;
-	private MovieArea movieArea;
-	private Ticket ticket = new Ticket();
+	private MovieTimtTable movieTimetable;
+	private Reservation reservation = new Reservation();
 	private String seatState;
-	private String yymmdd;
-	private MovieArea pre_MovieArea;
+	private String movie_yymmdd;
+	private MovieTimtTable pre_MovieArea;
 	
 	// Design
 	private Font sit_font = new Font("나눔바른고딕", Font.BOLD, 15);
@@ -77,7 +77,7 @@ public class MovieSitPage extends CategoryFrame implements Runnable {
 	// DB
 	private DB_MovieTimeTable connect_movieArea = new DB_MovieTimeTable();
 
-	public MovieSitPage(User user, MovieArea pre_movieArea, String yymmdd) {
+	public MovieSitPage(User user, MovieTimtTable pre_movieArea, String movie_yymmdd) {
 		super("영화 좌석 선택");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
@@ -89,15 +89,15 @@ public class MovieSitPage extends CategoryFrame implements Runnable {
 		
 		// 정보 연결
 		this.pre_MovieArea = pre_MovieArea;
-		this.yymmdd = yymmdd;
+		this.movie_yymmdd = movie_yymmdd;
 		this.user = user;
-		this.movieArea = connect_movieArea.getMovieArea(pre_movieArea.get_key());
-		seatState = movieArea.getSeatState();
+		this.movieTimetable = connect_movieArea.getMovieArea(pre_movieArea.get_key());
+		seatState = movieTimetable.getSeatState();
 
-		// ticket에 정보 set
-		ticket.setUserID(user.getUserID());
-		ticket.setMovieareaKey(movieArea.get_key());
-		ticket.setYymmdd(yymmdd);
+		// reservation 에 정보 set
+		reservation.setUserID(user.getUserID());
+		reservation.setMovieareaKey(movieTimetable.get_key());
+		reservation.setMoiveYYMMDD(movie_yymmdd);
 		
 		gray.setBackground(Color.LIGHT_GRAY);
 
@@ -282,7 +282,7 @@ public class MovieSitPage extends CategoryFrame implements Runnable {
 		
 			// 다음 버튼
 			if (e.getSource() == next) {
-				TestResevation();
+				go_Resevation();
 			}
 
 		}
@@ -334,12 +334,12 @@ public class MovieSitPage extends CategoryFrame implements Runnable {
 		
 	}
 	
-	public void TestResevation() {
+	public void go_Resevation() {
 		if (num_adult == 0 && num_teen == 0 && num_kids == 0) {
 			JOptionPane.showMessageDialog(null, "인원을 선택해주세요");
 		} else {
 			// DB_MovieArea에서 seatState 받기
-			String db_seatState = connect_movieArea.getMovieArea(movieArea.get_key()).getSeatState();
+			String db_seatState = connect_movieArea.getMovieArea(movieTimetable.get_key()).getSeatState();
 			int[][] intdb_seatSit = new int[9][24];
 			
 			//영화 좌석 정보	 예매1 비어있는자리 0	
@@ -363,17 +363,16 @@ public class MovieSitPage extends CategoryFrame implements Runnable {
 				}
 				Arrays.sort(seat_Name);//정렬 오름차순
 				// 정보들 저장
-				
-				ticket.setSeatWhere(Arrays.toString(seat_Name));
-				ticket.setSeatCount(selectCount);
-				movieArea.setSeatState(seatState);
-				Thread t1 = new Thread(new PayPage(user, ticket, movieArea,num_adult,num_teen, num_kids));
+				reservation.setSeatWhere(Arrays.toString(seat_Name));
+				reservation.setSeatCount(selectCount);
+				movieTimetable.setSeatState(seatState);
+				Thread t1 = new Thread(new PayPage(user, reservation, movieTimetable,num_adult,num_teen, num_kids));
 				t1.start();
 				startRunMovieSit = false;
 			
 			} else {
 				JOptionPane.showMessageDialog(null, "이미 선택된 좌석입니다.");
-				MovieSitPage t1 = new MovieSitPage(user, movieArea,yymmdd);
+				MovieSitPage t1 = new MovieSitPage(user, movieTimetable,movie_yymmdd);
 				Thread th = new Thread(t1);
 				th.start();
 			}

@@ -10,6 +10,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -23,11 +25,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import Movie.Movie;
-import Movie.MovieArea;
+import Movie.MovieTimtTable;
 import User.User;
 import page.CategoryFrame.windowAdapter;
 import page.MyPage.BtnEvent;
-import reservation.Ticket;
+import reservation.Reservation;
 
 public class PayPage extends JFrame implements ActionListener, Runnable {
 	private final static int PaddingLeft = 50;
@@ -65,9 +67,9 @@ public class PayPage extends JFrame implements ActionListener, Runnable {
 
 	private String howPay = card.getText();
 
-	private Ticket ticket;
+	private Reservation reservation;
 	private User user;
-	private MovieArea movieArea;
+	private MovieTimtTable movieArea;
 	private int num_adult, num_teen, num_kids;
 	private boolean startPayPage = false;
 	private int moviePrice;
@@ -78,8 +80,13 @@ public class PayPage extends JFrame implements ActionListener, Runnable {
 	// design
 	private Font compo = new Font("≥™¥ÆπŸ∏•∞ÌµÒ", Font.BOLD, 20);
 	private Font input = new Font("≥™¥ÆπŸ∏•∞ÌµÒ", Font.PLAIN, 15);
-
-	public PayPage(User user, Ticket ticket, MovieArea movieArea, int num_adult, int num_teen, int num_kids) {
+	
+	//today
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd",Locale.KOREA);
+	private Calendar calendar = Calendar.getInstance();
+	String today = sdf.format(calendar.getTime()).toString();
+	
+	public PayPage(User user, Reservation reservation, MovieTimtTable movieArea, int num_adult, int num_teen, int num_kids) {
 
 		addWindowListener(new windowAdapter());
 		setIconImage(img);
@@ -102,7 +109,8 @@ public class PayPage extends JFrame implements ActionListener, Runnable {
 		panel.add(choice);
 
 		// ¡§∫∏
-		this.ticket = ticket;
+		this.reservation = reservation;
+		this.reservation.setYymmdd(today);
 		this.user = user;
 		this.movieArea = movieArea;
 		this.num_adult = num_adult;
@@ -242,14 +250,14 @@ public class PayPage extends JFrame implements ActionListener, Runnable {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == finish) {
-			ticket.setPayHow(howPay);
+			reservation.setPayHow(howPay);
 
 			if ((card.isSelected()
 					&& (inputCardNumber.getText().length() > 1 && inputCardPassword.getText().length() > 1))
 					|| (cash.isSelected() && inputName.getText().length() > 1)) {
-				ticket.setPrice(moviePrice);
+				reservation.setPrice(moviePrice);
 				startPayPage = false;
-				new PayTimer(user, movieArea, ticket, num_adult, num_teen, num_kids);// pay≈∏¿Ã∏”
+				new PayTimer(user, movieArea, reservation, num_adult, num_teen, num_kids);// pay≈∏¿Ã∏”
 				dispose();
 			} else {
 				JOptionPane message = new JOptionPane();

@@ -8,7 +8,7 @@ import java.util.Locale;
 import java.util.StringTokenizer;
 
 import Movie.DB_MovieTimeTable;
-import Movie.MovieArea;
+import Movie.MovieTimtTable;
 import User.User;
 
 public class Test1 {

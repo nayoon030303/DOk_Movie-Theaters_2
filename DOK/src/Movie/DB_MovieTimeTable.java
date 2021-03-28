@@ -11,8 +11,8 @@ public class DB_MovieTimeTable {
 	private Connection con;	
 	private Statement st;
 	private ResultSet rs;
-	private MovieArea movieArea;
-	private Vector<MovieArea> movieAreas = new Vector<MovieArea>();
+	private MovieTimtTable movieArea;
+	private Vector<MovieTimtTable> movieAreas = new Vector<MovieTimtTable>();
 
 	public DB_MovieTimeTable() {
 		try {
@@ -70,7 +70,7 @@ public class DB_MovieTimeTable {
 		}
 	}
 
-	public Vector<MovieArea> getMovieArea(int movie_key, int theater_key){
+	public Vector<MovieTimtTable> getMovieArea(int movie_key, int theater_key){
 		try {
 			String SQL = "select* from movietimetable where movieTT_Key like " + movie_key + " and movieTTTheaterInof like " + theater_key
 					+ " ;";
@@ -81,7 +81,7 @@ public class DB_MovieTimeTable {
 			// int n=0;
 			while (rs.next()) {
 
-				movieArea = new MovieArea();
+				movieArea = new MovieTimtTable();
 				movieArea.set_key(rs.getInt("movieTT_key"));
 				movieArea.setArea_key(rs.getInt("movieTTTheaterInfo"));
 				movieArea.setHall(rs.getString("movieTTHall"));
@@ -109,7 +109,7 @@ public class DB_MovieTimeTable {
 	}
 
 	
-	public MovieArea getMovieArea(int _key) {
+	public MovieTimtTable getMovieArea(int _key) {
 		try {
 			movieAreas.clear();
 			String SQL = "select* from movietimetable where movieTT_key like " + _key + ";";
@@ -117,7 +117,7 @@ public class DB_MovieTimeTable {
 			rs = st.executeQuery(SQL);
 
 			while (rs.next()) {
-				movieArea = new MovieArea();
+				movieArea = new MovieTimtTable();
 				movieArea.set_key(rs.getInt("movieTT_key"));
 				movieArea.setArea_key(rs.getInt("movieTTTheaterInfo"));
 				movieArea.setHall(rs.getString("movieTTHall"));
@@ -142,7 +142,7 @@ public class DB_MovieTimeTable {
 		return movieArea;
 	}
 	
-	public Vector<MovieArea> getMovieArea(int movie_key, int theater_key, int weeks) {
+	public Vector<MovieTimtTable> getMovieArea(int movie_key, int theater_key, int weeks) {
 		try {
 			movieAreas.clear();
 			String SQL = "select* from movietimetable where movieTT_movieKey like " + movie_key + " and movieTTTheaterInfo like " + theater_key
@@ -151,7 +151,7 @@ public class DB_MovieTimeTable {
 			rs = st.executeQuery(SQL);
 
 			while (rs.next()) {
-				movieArea = new MovieArea();
+				movieArea = new MovieTimtTable();
 				movieArea.set_key(rs.getInt("movieTT_key"));
 				movieArea.setArea_key(rs.getInt("movieTTTheaterInfo"));
 				movieArea.setHall(rs.getString("movieTTHall"));

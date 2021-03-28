@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Movie.DB_MovieTimeTable;
-import Movie.MovieArea;
+import Movie.MovieTimtTable;
 import User.User;
-import reservation.DB_ticket;
-import reservation.Ticket;
+import reservation.DB_reservation;
+import reservation.Reservation;
 
 public class PayTimer extends JFrame {
 	private JPanel panel = new JPanel();
@@ -30,8 +30,8 @@ public class PayTimer extends JFrame {
 	private ImageIcon imgLoading = new ImageIcon("src/img/loading250.gif");
 	private JLabel iconLoading = new JLabel(imgLoading);
 	// private ImageIcon imgLoadingimg;
-	private MovieArea movieArea;
-	private Ticket ticket;
+	private MovieTimtTable movieArea;
+	private Reservation reservation;
 	private User user;
 	private int num_adult, num_teen, num_kids;
 	private int WIDTH = 500;
@@ -41,7 +41,7 @@ public class PayTimer extends JFrame {
 	Image img = toolkit.getImage("src/imges/p_octopus.png");
 	
 	// DB
-	private DB_ticket connect_ticket = new DB_ticket();
+	private DB_reservation connect_reservation = new DB_reservation();
 	private DB_MovieTimeTable connect_movieArea = new DB_MovieTimeTable();
 
 	// Design
@@ -49,7 +49,7 @@ public class PayTimer extends JFrame {
 	private Font font2 = new Font("나눔바른고딕", Font.PLAIN, 20);
 	private Font font3 = new Font("휴먼둥근헤드라인", Font.PLAIN, 35);
 
-	public PayTimer(User user, MovieArea movieArea, Ticket ticket, int num_adult, int num_teen, int num_kids) {
+	public PayTimer(User user, MovieTimtTable movieArea, Reservation ticket, int num_adult, int num_teen, int num_kids) {
 
 		setIconImage(img);
 		setTitle("결제중입니다");
@@ -60,7 +60,7 @@ public class PayTimer extends JFrame {
 		// c.setLayout(null); //플로우 레이아웃
 
 		this.movieArea = movieArea;
-		this.ticket = ticket;
+		this.reservation = ticket;
 		this.user = user;
 		this.num_adult = num_adult;
 		this.num_teen = num_teen;
@@ -127,14 +127,14 @@ public class PayTimer extends JFrame {
 		}
 		
 		// 예매 가능한
-		if (c == ticket.getSeatCount()) {
+		if (c == reservation.getSeatCount()) {
 			movieArea.setSeatState(movieArea.getSeatState().replace("2", "1"));// 2를 1로 치환
-			connect_ticket.addTicket(ticket.getUserID(), ticket.getMovieareaKey(), ticket.getPrice(), ticket.getSeatCount(),
-					ticket.getSeatWhere(), ticket.getYymmdd(), ticket.getPayHow());
-			connect_movieArea.updateMovieArea(movieArea.get_key(), movieArea.getVacantSeat() - ticket.getSeatCount(),
+			connect_reservation.addTicket(reservation);
+			System.out.println("ticket 완료");
+			connect_movieArea.updateMovieArea(movieArea.get_key(), movieArea.getVacantSeat() - reservation.getSeatCount(),
 					movieArea.getSeatState());
 			System.out.println("시작");
-			Timer2 t2 = new Timer2(this, iconLoading, user, movieArea, ticket, num_adult,
+			Timer2 t2 = new Timer2(this, iconLoading, user, movieArea, reservation, num_adult,
 			num_teen, num_kids); t2.start();
 			 
 		} else {

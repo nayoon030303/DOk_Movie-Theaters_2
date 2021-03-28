@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import Movie.MovieArea;
+import Movie.MovieTimtTable;
 
 public class DB_MovieTimeTable {
 	private Connection con;	
 	private Statement st;
 	private ResultSet rs;
-	private MovieArea movieArea;
-	private Vector<MovieArea> movieAreas = new Vector<MovieArea>();
+	private MovieTimtTable movieArea;
+	private Vector<MovieTimtTable> movieAreas = new Vector<MovieTimtTable>();
 
 	public DB_MovieTimeTable() {
 		try {
@@ -30,7 +30,7 @@ public class DB_MovieTimeTable {
 
 	public void makeMovie_Area(int area_key, String hall, int weeks, String startTime, int movieKey, int vacantSeat,String seatState){
 		try {
-			String SQL = "INSERT INTO moviearea(area_key, hall , weeks, startTime, movieKey, vacantSeat, seatState)"
+			String SQL = "INSERT INTO movietimetable(movieTTTheaterInfo, movieTTHall , weeks, movieTTStartTime, movieTT_movieKey, movieTTVacantSeat, movieTTSeatState)"
 					+ "VALUES(\"" + area_key + "\",\"" + hall + "\",\"" + weeks + "\",\"" + startTime + "\",\""
 					+ movieKey + "\",\"" + vacantSeat + "\",\"" + seatState + "\");";
 			// System.out.println(SQL);
@@ -58,7 +58,7 @@ public class DB_MovieTimeTable {
 	
 	public void UpdateMovieAreas(int weeks) {
 		try {
-			String SQL = "UPDATE moviearea SET vacantSeat = 216 , seatState = \"000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000\" "
+			String SQL = "UPDATE movietimetable SET movieVacantSeat = 216 , movieSeatState = \"000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000/000000000000000000000000\" "
 					+ "where weeks like "+ weeks;
 			
 			int success = st.executeUpdate(SQL);
@@ -72,9 +72,9 @@ public class DB_MovieTimeTable {
 		}
 	}
 
-	public Vector<MovieArea> getMovieArea(int movie_key, int theater_key){
+	public Vector<MovieTimtTable> getMovieArea(int movie_key, int theater_key){
 		try {
-			String SQL = "select* from moviearea where movieKey like " + movie_key + " and area_key like " + theater_key
+			String SQL = "select* from movietimetable where movieTT_movieKey like " + movie_key + " and movieTTTheaterInfo like " + theater_key
 					+ " ;";
 			// System.out.println(SQL);
 			rs = st.executeQuery(SQL);
@@ -83,15 +83,15 @@ public class DB_MovieTimeTable {
 			// int n=0;
 			while (rs.next()) {
 
-				movieArea = new MovieArea();
-				movieArea.set_key(rs.getInt("_key"));
-				movieArea.setArea_key(rs.getInt("area_key"));
-				movieArea.setHall(rs.getString("hall"));
+				movieArea = new MovieTimtTable();
+				movieArea.set_key(rs.getInt("movieTT_key"));
+				movieArea.setArea_key(rs.getInt("movieTTTheaterInfo"));
+				movieArea.setHall(rs.getString("movieTTHall"));
 				movieArea.setWeeks(rs.getInt("weeks"));
-				movieArea.setMovieKey(rs.getInt("movieKey"));
-				movieArea.setVacantSeat(rs.getInt("vacantSeat"));
-				movieArea.setStartTime(rs.getString("startTime"));
-				movieArea.setSeatState(rs.getString("seatState"));
+				movieArea.setMovieKey(rs.getInt("movieTT_movieKey"));
+				movieArea.setVacantSeat(rs.getInt("movieTTVacantSeat"));
+				movieArea.setStartTime(rs.getString("movieTTStartTime"));
+				movieArea.setSeatState(rs.getString("movieTTSeatState"));
 				movieAreas.add(movieArea);
 				// n++;
 			}
@@ -111,24 +111,25 @@ public class DB_MovieTimeTable {
 	}
 
 	
-	public MovieArea getMovieArea(int _key) {
+	public MovieTimtTable getMovieArea(int _key) {
 		try {
 			movieAreas.clear();
-			String SQL = "select* from moviearea where _key like " + _key + ";";
+			String SQL = "select* from movietimetable where movieTT_key like " + _key + ";";
 			// System.out.println(SQL);
 			rs = st.executeQuery(SQL);
 
 			while (rs.next()) {
-				movieArea = new MovieArea();
-				movieArea.set_key(rs.getInt("_key"));
-				movieArea.setArea_key(rs.getInt("area_key"));
-				movieArea.setHall(rs.getString("hall"));
+				movieArea = new MovieTimtTable();
+				movieArea.set_key(rs.getInt("movieTT_key"));
+				movieArea.setArea_key(rs.getInt("movieTTTheaterInfo"));
+				movieArea.setHall(rs.getString("movieTTHall"));
 				movieArea.setWeeks(rs.getInt("weeks"));
-				movieArea.setMovieKey(rs.getInt("movieKey"));
-				movieArea.setVacantSeat(rs.getInt("vacantSeat"));
-				movieArea.setStartTime(rs.getString("startTime"));
-				movieArea.setSeatState(rs.getString("seatState"));
-
+				movieArea.setMovieKey(rs.getInt("movieTT_movieKey"));
+				movieArea.setVacantSeat(rs.getInt("movieTTVacantSeat"));
+				movieArea.setStartTime(rs.getString("movieTTStartTime"));
+				movieArea.setSeatState(rs.getString("movieTTSeatState"));
+				
+		
 			}
 
 		} catch (Exception e) {
@@ -145,25 +146,26 @@ public class DB_MovieTimeTable {
 		return movieArea;
 	}
 	
-	public Vector<MovieArea> getMovieArea(int movie_key, int theater_key, int weeks) {
+	public Vector<MovieTimtTable> getMovieArea(int movie_key, int theater_key, int weeks) {
 		try {
 			movieAreas.clear();
-			String SQL = "select* from moviearea where movieKey like " + movie_key + " and area_key like " + theater_key
+			String SQL = "select* from movietimetable where movieTT_movieKey like " + movie_key + " and movieTTTheaterInfo like " + theater_key
 					+ " and weeks like " + weeks + ";";
 			// System.out.println(SQL);
 			rs = st.executeQuery(SQL);
 
 			while (rs.next()) {
-				movieArea = new MovieArea();
-				movieArea.set_key(rs.getInt("_key"));
-				movieArea.setArea_key(rs.getInt("area_key"));
-				movieArea.setHall(rs.getString("hall"));
+				movieArea = new MovieTimtTable();
+				movieArea.set_key(rs.getInt("movieTT_key"));
+				movieArea.setArea_key(rs.getInt("movieTTTheaterInfo"));
+				movieArea.setHall(rs.getString("movieTTHall"));
 				movieArea.setWeeks(rs.getInt("weeks"));
-				movieArea.setMovieKey(rs.getInt("movieKey"));
-				movieArea.setVacantSeat(rs.getInt("vacantSeat"));
-				movieArea.setStartTime(rs.getString("startTime"));
-				movieArea.setSeatState(rs.getString("seatState"));
+				movieArea.setMovieKey(rs.getInt("movieTT_movieKey"));
+				movieArea.setVacantSeat(rs.getInt("movieTTVacantSeat"));
+				movieArea.setStartTime(rs.getString("movieTTStartTime"));
+				movieArea.setSeatState(rs.getString("movieTTSeatState"));
 				movieAreas.add(movieArea);
+				// n++;
 			}
 
 		} catch (Exception e) {
@@ -185,7 +187,7 @@ public class DB_MovieTimeTable {
 	public int countMovieArea(){
 		int n = 0;
 		try {
-			String SQL = " SELECT COUNT(*)  FROM movieArea";
+			String SQL = " SELECT COUNT(*)  FROM movietimetable";
 			rs = st.executeQuery(SQL);
 			if (rs.next()) {
 				n = rs.getInt("COUNT(*)");
@@ -206,8 +208,8 @@ public class DB_MovieTimeTable {
 	public void updateMovieArea(int _key, int vacantSeat, String seatState) {
 	
 		try {
-			String SQL = "UPDATE movieArea SET vacantSeat = " + vacantSeat + " , seatState = \"" + seatState
-					+ "\" WHERE _key = \"" + _key + "\";";
+			String SQL = "UPDATE movietimetable SET movieTTVacantSeat = " + vacantSeat + " , movieTTSeatState = \"" + seatState
+					+ "\" WHERE movieTT_key = \"" + _key + "\";";
 			// System.out.println(SQL);
 			int success = st.executeUpdate(SQL);
 

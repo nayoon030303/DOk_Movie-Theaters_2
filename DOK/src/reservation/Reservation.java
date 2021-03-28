@@ -1,6 +1,6 @@
 package reservation;
 
-public class Ticket {
+public class Reservation {
 	private int _key;
 	private String userID;
 	private int movieareaKey;
@@ -9,11 +9,12 @@ public class Ticket {
 	private String seatWhere;
 	private String yymmdd;
 	private String payHow;
+	private String moiveYYMMDD;
 	
-	public Ticket() {}
+	public Reservation() {}
 
-	public Ticket(int _key, String userID,int movieareaKey, int price, int seatCount, String seatWhere, String yymmdd,
-			String payHow) {
+	public Reservation(int _key, String userID,int movieareaKey, int price, int seatCount, String seatWhere, String yymmdd,
+			String payHow, String movieYYMMDD) {
 		super();
 		this._key = _key;
 		this.userID = userID;
@@ -23,6 +24,7 @@ public class Ticket {
 		this.seatWhere = seatWhere;
 		this.yymmdd = yymmdd;
 		this.payHow = payHow;
+		this.moiveYYMMDD = movieYYMMDD;
 	}
 
 	public int get_key() {
@@ -87,6 +89,14 @@ public class Ticket {
 
 	public void setPayHow(String payHow) {
 		this.payHow = payHow;
+	}
+
+	public String getMoiveYYMMDD() {
+		return moiveYYMMDD;
+	}
+
+	public void setMoiveYYMMDD(String moiveYYMMDD) {
+		this.moiveYYMMDD = moiveYYMMDD;
 	}
 	
 }

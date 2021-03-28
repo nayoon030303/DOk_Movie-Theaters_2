@@ -3,20 +3,20 @@ package page;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import Movie.MovieArea;
+import Movie.MovieTimtTable;
 import User.User;
-import reservation.Ticket;
+import reservation.Reservation;
 
 class Timer2 extends Thread {
 	private JFrame frame;
 	private JLabel timerLabel;
 	private int n;
 	private User user;
-	private MovieArea movieArea;
-	private Ticket ticket;
+	private MovieTimtTable movieArea;
+	private Reservation ticket;
 	private int num_adult, num_teen, num_kids;
 
-	public Timer2(JFrame frame, JLabel timerLabel, User user, MovieArea movieArea, Ticket ticket, int num_adult,
+	public Timer2(JFrame frame, JLabel timerLabel, User user, MovieTimtTable movieArea, Reservation ticket, int num_adult,
 			int num_teen, int num_kids) {
 		this.frame = frame;
 		this.timerLabel = timerLabel;

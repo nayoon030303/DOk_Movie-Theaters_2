@@ -11,7 +11,8 @@ public class Main {
 	public static void main(String[] args) {  
 		// TODO Auto-generated method stub
 		//new LoadingPage(user);
-		 new DOKPage(user);
+		 //new DOKPage(user);
+		new LoginPage();
 		//new ChartPage(user);
 		//new Reservation_start_page(user);
 	}

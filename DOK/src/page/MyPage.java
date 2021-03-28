@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import com.sun.xml.internal.ws.org.objectweb.asm.Label;
+
 import Area.DB_Area;
 import Area.DB_MovieTimeTable;
 import Movie.DB_MovieInfo;
@@ -49,7 +51,15 @@ public class MyPage extends CategoryFrame{
 	private JLabel userInfo = new JLabel("개인 정보");
 	private JLabel record_movie = new JLabel();
 	private JLabel record_movieInfo = new JLabel();
-	private JLabel[] recent_movieInfo = new JLabel[4];
+	private JLabel[][] recent_movieInfo = new JLabel[4][4];
+	
+	private JLabel[] resDay = new JLabel[4];
+	private JLabel[] resMovieName = new JLabel[4];
+	private JLabel[] resMovieInfo = new JLabel[4];
+	private JLabel[] resMovieState = new JLabel[4];
+	
+	
+	
 	private Vector<Reservation> reseravations = new Vector<Reservation>();
 	
 
@@ -74,6 +84,8 @@ public class MyPage extends CategoryFrame{
 	private Movie movie;
 	private MovieTimtTable movieTimetable;
 	
+	//text
+	private String[] texts = {"예매일","상품명","이용일 / 매수","현재 상태"};
 	public MyPage() {}
 	public MyPage(User user) {
 		
@@ -177,49 +189,97 @@ public class MyPage extends CategoryFrame{
 		panel.setLayout(null);
 		add(panel);
 		
+		
+		/*
+		 * for(int i =0; i<recent_movieInfo[0].length; i++) {
+		 * 
+		 * recent_movieInfo[0][i] = new JLabel(texts[i]);
+		 * panel.add(recent_movieInfo[0][i]);
+		 * recent_movieInfo[0][i].setBounds(POS_X_CENTER - 50+(i*160),
+		 * PaddingTop+300+(250/4)*(1)+3, 150, 250/4);
+		 * recent_movieInfo[0][i].setBorder(new LineBorder(purple, 1));
+		 * recent_movieInfo[0][i].setBorder(new LineBorder(purple, 1));
+		 * recent_movieInfo[0][i].setHorizontalAlignment(JLabel.CENTER);
+		 * recent_movieInfo[0][i].setFont(font2);
+		 * recent_movieInfo[0][i].setBackground(Color.red);
+		 * 
+		 * }
+		 */
+		
 		if(reseravations.size()>0) {
-			int num =0;
+			int num = reseravations.size();
 			if(reseravations.size()>4) {
 				num = 4;
 			}else{
 				num = reseravations.size();
 			}
-			for(int i=0; i<num; i++) {
-				recent_movieInfo[i] = new JLabel();
-				recent_movieInfo[i].setBorder(new LineBorder(purple, 1));
-				recent_movieInfo[i].setBorder(new LineBorder(purple, 1));
-				recent_movieInfo[i].setBackground(Color.red);
-				recent_movieInfo[i].setBounds(POS_X_CENTER - 50, PaddingTop+300+(250/4)*(i+1)+3, 650, 250/4);
-				panel.add(recent_movieInfo[i]);
+			for(int y=0; y<num; y++) {
+				for(int x=0; x<recent_movieInfo[y].length; x++){
+					//기본 설정
+					recent_movieInfo[y][x] = new JLabel("aa");
+					recent_movieInfo[y][x].setBorder(new LineBorder(purple, 1));
+					recent_movieInfo[y][x].setBorder(new LineBorder(purple, 1));
+					recent_movieInfo[y][x].setFont(font2);
+					recent_movieInfo[y][x].setBackground(Color.red);
+					recent_movieInfo[y][x].setHorizontalAlignment(JLabel.CENTER);
+					//recent_movieInfo[y][x].setBounds(POS_X_CENTER - 50+(x*160), PaddingTop+300+(250/4)*(y+1)+3, 150, 250/4);
+				    panel.add(recent_movieInfo[y][x]);
+					
+				    //상단
+				    if(y == 0)
+				    {
+				    	recent_movieInfo[y][x].setText(texts[x]);
+				    }
+				    if(x == 0 )
+				    {
+				    	recent_movieInfo[y][x].setBounds(POS_X_CENTER - 50, PaddingTop+300+(250/4)*(y+1)+3, 130, 250/4);
+				    }else if(x == 1)
+				    {
+				    	recent_movieInfo[y][x].setBounds(POS_X_CENTER - 50+130, PaddingTop+300+(250/4)*(y+1)+3, 250, 250/4);
+				    }else if(x == 2)
+				    {
+				    	recent_movieInfo[y][x].setBounds(POS_X_CENTER - 50+130+250, PaddingTop+300+(250/4)*(y+1)+3, 140, 250/4);
+				    }else if(x == 3) {
+				    	recent_movieInfo[y][x].setBounds(POS_X_CENTER - 50+130+250+140, PaddingTop+300+(250/4)*(y+1)+3, 130, 250/4);
+				    }
+					
+				    if(y!=0)
+				    {
+				    	int movieTimetableKey = reseravations.get(y-1).getMovieTimetable();
+					    movieTimetable = connect_movieTimetable.getMovieArea(movieTimetableKey);
+					    int movieKey = movieTimetable.getMovieKey();
+					    movie = connect_movie.getMovie(movieKey); String yymmdd, movieName,movieYYMMDD,seatCount;
+					    //예매일	상품명	이용일/매수		현재상태  
+					    yymmdd = reseravations.get(y-1).getYymmdd();
+					    movieName = movie.getM_name();
+					    movieYYMMDD = reseravations.get(2).getMoiveYYMMDD();
+					    System.out.println(movieYYMMDD);
+					    seatCount =	Integer.toString(reseravations.get(y-1).getSeatCount());
+					    
+					    if(x==0){
+					    	recent_movieInfo[y][x].setText(yymmdd);
+					    }else if(x==1) {
+					    	recent_movieInfo[y][x].setText(movieName);
+					    }else if(x==2) {
+					    	recent_movieInfo[y][x].setText(movieYYMMDD);
+					    }else if(x==3) {
+					    	recent_movieInfo[y][x].setText(movieYYMMDD+"\n"+"aa");
+					    }
+					    
+					    
+					    					    
+				    }
+				    
+						
+					
+					/*
+					 * recent_movieInfo[i].setText("<html>"
+					 * +"  예매일: "+yymmdd+"&nbsp;&nbsp;&nbsp;&nbsp;"+
+					 * movieName+"&nbsp;&nbsp;&nbsp;&nbsp;" +seatCount+"</html>" );//+
+					 * "&nbsp;&nbsp;" + country+"&nbsp;&nbsp;"+hall+"</html>");
+					 */				
+				    }
 				
-				int movieTimetableKey = reseravations.get(i).getMovieTimetable();
-				movieTimetable = connect_movieTimetable.getMovieArea(movieTimetableKey);
-				int movieKey = movieTimetable.getMovieKey();
-				movie = connect_movie.getMovie(movieKey);
-				String yymmdd, movieName, movieYYMMDD,seatCount;
-				yymmdd = reseravations.get(i).getYymmdd();
-				movieYYMMDD = reseravations.get(i).getMoiveYYMMDD();
-				seatCount = Integer.toString(reseravations.get(i).getSeatCount());
-				movieName = movie.getM_name();
-				recent_movieInfo[i].setText("<html>" +"예매일"+yymmdd+"&nbsp;&nbsp;&nbsp;&nbsp;"+ movieName+"&nbsp;&nbsp;&nbsp;&nbsp;"
-				+seatCount+"</html>" );//+ "&nbsp;&nbsp;" + country+"&nbsp;&nbsp;"+hall+"</html>");
-				
-				/*
-				String yymmdd,movieName,area,country,startTime,hall;
-				int a = tickets.get(i).getMovieareaKey();
-				MovieArea movieArea = connect_movieArea.getMovieArea(a);
-				int areaKey = movieArea.getArea_key();
-				Theater theater = coneect_theater.getTheater(areaKey);
-				Movie movie = connect_movie.getMovie(movieArea.getMovieKey()); 
-				yymmdd = tickets.get(i).getYymmdd();
-				movieName = movie.getM_name();
-				area = theater.getArea();
-				country = theater.getCountry();
-				startTime = movieArea.getStartTime();
-				hall = movieArea.getHall();
-				recent_movieInfo[i].setText("<html>" +yymmdd+"&nbsp;&nbsp;&nbsp;&nbsp;"+ movieName+"&nbsp;&nbsp;&nbsp;&nbsp;"+area + "&nbsp;&nbsp;" + country+"&nbsp;&nbsp;"+hall+"</html>");
-				panel.add(recent_movieInfo[i]);
-			*/
 			}
 		}else {
 			record_movieInfo.setText("아직 최근 예매하신 내역이 없으시네요 !");

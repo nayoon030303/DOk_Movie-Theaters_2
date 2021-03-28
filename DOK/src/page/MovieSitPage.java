@@ -96,7 +96,7 @@ public class MovieSitPage extends CategoryFrame implements Runnable {
 
 		// reservation ¿¡ Á¤º¸ set
 		reservation.setUserID(user.getUserID());
-		reservation.setMovieareaKey(movieTimetable.get_key());
+		reservation.setMovieTimetable(movieTimetable.get_key());
 		reservation.setMoiveYYMMDD(movie_yymmdd);
 		
 		gray.setBackground(Color.LIGHT_GRAY);

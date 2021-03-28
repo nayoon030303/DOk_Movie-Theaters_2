@@ -3,7 +3,7 @@ package reservation;
 public class Reservation {
 	private int _key;
 	private String userID;
-	private int movieareaKey;
+	private int movieTimetable;
 	private int price;
 	private int seatCount;
 	private String seatWhere;
@@ -13,12 +13,12 @@ public class Reservation {
 	
 	public Reservation() {}
 
-	public Reservation(int _key, String userID,int movieareaKey, int price, int seatCount, String seatWhere, String yymmdd,
+	public Reservation(int _key, String userID,int movieTimetable, int price, int seatCount, String seatWhere, String yymmdd,
 			String payHow, String movieYYMMDD) {
 		super();
 		this._key = _key;
 		this.userID = userID;
-		this.movieareaKey = movieareaKey;
+		this.movieTimetable = movieTimetable;
 		this.price = price;
 		this.seatCount = seatCount;
 		this.seatWhere = seatWhere;
@@ -43,12 +43,13 @@ public class Reservation {
 		this.userID = userID;
 	}
 
-	public int getMovieareaKey() {
-		return movieareaKey;
+
+	public int getMovieTimetable() {
+		return movieTimetable;
 	}
 
-	public void setMovieareaKey(int movieareaKey) {
-		this.movieareaKey = movieareaKey;
+	public void setMovieTimetable(int movieTimetable) {
+		this.movieTimetable = movieTimetable;
 	}
 
 	public int getPrice() {

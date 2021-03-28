@@ -52,7 +52,7 @@ public class MyPage extends CategoryFrame{
 	private JLabel[] recent_movieInfo = new JLabel[4];
 	private Vector<Reservation> reseravations = new Vector<Reservation>();
 	
-	
+
 	//Design
 	private Font font1 = new Font("»ﬁ∏’µ’±Ÿ«ÏµÂ∂Û¿Œ", Font.PLAIN, 25);
 	private Font font2 = new Font("»ﬁ∏’µ’±Ÿ«ÏµÂ∂Û¿Œ", Font.PLAIN, 15);
@@ -67,9 +67,12 @@ public class MyPage extends CategoryFrame{
 
 	//DB
 	private DB_reservation connect_reservation = new DB_reservation();
-	private DB_MovieTimeTable connect_movieArea = new DB_MovieTimeTable();
+	private DB_MovieTimeTable connect_movieTimetable = new DB_MovieTimeTable();
 	private DB_Theater coneect_theater = new DB_Theater();
 	private DB_MovieInfo connect_movie  = new DB_MovieInfo();
+	
+	private Movie movie;
+	private MovieTimtTable movieTimetable;
 	
 	public MyPage() {}
 	public MyPage(User user) {
@@ -189,8 +192,18 @@ public class MyPage extends CategoryFrame{
 				recent_movieInfo[i].setBounds(POS_X_CENTER - 50, PaddingTop+300+(250/4)*(i+1)+3, 650, 250/4);
 				panel.add(recent_movieInfo[i]);
 				
-				String yymmdd, movieName, seatCount;
-				int movieTimeKey = reseravations.get(i).getMovieareaKey();
+				int movieTimetableKey = reseravations.get(i).getMovieTimetable();
+				movieTimetable = connect_movieTimetable.getMovieArea(movieTimetableKey);
+				int movieKey = movieTimetable.getMovieKey();
+				movie = connect_movie.getMovie(movieKey);
+				String yymmdd, movieName, movieYYMMDD,seatCount;
+				yymmdd = reseravations.get(i).getYymmdd();
+				movieYYMMDD = reseravations.get(i).getMoiveYYMMDD();
+				seatCount = Integer.toString(reseravations.get(i).getSeatCount());
+				movieName = movie.getM_name();
+				recent_movieInfo[i].setText("<html>" +"øπ∏≈¿œ"+yymmdd+"&nbsp;&nbsp;&nbsp;&nbsp;"+ movieName+"&nbsp;&nbsp;&nbsp;&nbsp;"
+				+seatCount+"</html>" );//+ "&nbsp;&nbsp;" + country+"&nbsp;&nbsp;"+hall+"</html>");
+				
 				/*
 				String yymmdd,movieName,area,country,startTime,hall;
 				int a = tickets.get(i).getMovieareaKey();

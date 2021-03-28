@@ -30,10 +30,10 @@ public class DB_reservation {
 	public boolean addTicket(Reservation res ) {
 		try {
 			String SQL = "INSERT INTO reservation (resuserID, res_MovieTimeKey, resPrice, resSeatCount, resSeatWhere, resYYMMDD, resPayHow,resMovieYYMMDD) "
-					+ "VALUES(\""+res.getUserID()+"\"," +"\""+ res.getMovieareaKey()+"\"," + "\""+res.getPrice()+"\",\"" 
+					+ "VALUES(\""+res.getUserID()+"\"," +"\""+ res.getMovieTimetable()+"\"," + "\""+res.getPrice()+"\",\"" 
 					+ res.getSeatCount()+"\",\""+res.getSeatWhere() +"\","+ "\""
 					+res.getYymmdd() +"\","+ "\""+res.getPayHow()+"\",\""+res.getMoiveYYMMDD()+"\");";
-			System.out.println(SQL);
+			//System.out.println(SQL);
 			int success = st.executeUpdate(SQL);
 				
 			//¼º°ø
@@ -58,7 +58,7 @@ public class DB_reservation {
 			while (rs.next()) {
 				ticket = new Reservation();
 				ticket.set_key(rs.getInt("res_key"));
-				ticket.setMovieareaKey(rs.getInt("res_MovieTimeKey"));
+				ticket.setMovieTimetable(rs.getInt("res_MovieTimeKey"));
 				ticket.setPrice(rs.getInt("resPrice"));
 				ticket.setSeatCount(rs.getInt("resSeatCount"));
 				ticket.setSeatWhere(rs.getString("resSeatWhere"));

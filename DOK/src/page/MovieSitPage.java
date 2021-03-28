@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Movie.DB_MovieArea;
+import Movie.DB_MovieTimeTable;
 import Movie.MovieArea;
 import User.User;
 import page.CategoryFrame;

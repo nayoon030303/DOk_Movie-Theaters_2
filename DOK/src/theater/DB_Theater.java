@@ -91,16 +91,16 @@ public class DB_Theater {
 	
 	public Theater[] getTheater(String area) {
 		try {
-			String SQL = "SELECT* FROM theaterinfo where area like \""+area+"\";";
+			String SQL = "SELECT* FROM theaterinfo where theaterAreaKey like \""+area+"\";";
 			//System.out.println(SQL);
 			rs = st.executeQuery(SQL);
 			int n = 0;
 			while(rs.next()) {
 				theaters[n] = new Theater();
-				theaters[n].set_key(rs.getInt("_key"));
-				theaters[n].setArea(rs.getString("area"));
-				theaters[n].setCountry(rs.getString("country"));
-				theaters[n].setNumHall(rs.getInt("numHall"));
+				theaters[n].set_key(rs.getInt("theater_key"));
+				theaters[n].setArea(rs.getString("theaterAreaKey"));
+				theaters[n].setCountry(rs.getString("theaterBranch"));
+				theaters[n].setNumHall(rs.getInt("theaterNumHall"));
 				
 				n++;
 			}

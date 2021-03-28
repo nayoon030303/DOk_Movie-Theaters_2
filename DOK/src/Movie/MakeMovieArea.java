@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Random;
 
+import Area.DB_MovieTimeTable;
 import theater.Theater;
 import theater.DB_Theater;
 

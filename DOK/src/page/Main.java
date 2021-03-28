@@ -8,11 +8,12 @@ public class Main {
 	public static final int SCREEN_HEIGHT = 1000;	
 	
 	static User user = new User();
-	public static void main(String[] args) {
+	public static void main(String[] args) {  
 		// TODO Auto-generated method stub
 		//new LoadingPage(user);
 		// new DOKPage(user);
-		new ChartPage(user);
+		//new ChartPage(user);
+		new Reservation_start_page(user);
 	}
 
 }

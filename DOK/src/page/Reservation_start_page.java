@@ -32,7 +32,7 @@ import javax.swing.border.LineBorder;
 
 import Area.Area;
 import Area.DB_Area;
-import Movie.DB_MovieArea;
+import Movie.DB_MovieTimeTable;
 import Movie.DB_MovieInfo;
 import Movie.Movie;
 import Movie.MovieArea;
@@ -170,7 +170,7 @@ public class Reservation_start_page extends CategoryFrame implements ActionListe
 		// 데어터 연결
 		area = area_connect.getArea();
 		theater = theater_connect.getTheater(areaKey);
-		movie = movie_connect.getMovieInfoAll("open_day");
+		movie = movie_connect.getMovieInfoAll("movieOpenDay");
 		this.user = user;
 
 		// 서울,경기

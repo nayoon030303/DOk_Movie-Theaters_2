@@ -32,7 +32,7 @@ public class DB_Area {
 			int n = 0;
 			while(rs.next()) {
 				area[n] = new Area();
-				area[n].setArea(rs.getString("_key"));
+				area[n].setArea(rs.getString("area_key"));
 				n++;
 			}
 			 

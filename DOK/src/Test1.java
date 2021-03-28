@@ -7,7 +7,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import Movie.DB_MovieArea;
+import Movie.DB_MovieTimeTable;
 import Movie.MovieArea;
 import User.User;
 

@@ -47,6 +47,7 @@ public class MyPage extends CategoryFrame{
 	private JLabel taste = new JLabel("영화 취향");
 	private JButton btn_modify_Info = new JButton();
 	private JButton btn_modify_Profile = new JButton();
+	private JButton btn_my_reservation = new JButton();
 	private JLabel userInfo = new JLabel("개인 정보");
 	private JLabel record_movie = new JLabel();
 	private JLabel record_movieInfo = new JLabel();
@@ -65,6 +66,7 @@ public class MyPage extends CategoryFrame{
 	private ImageIcon imgRecord = new ImageIcon("src/imges/record.png");
 	private ImageIcon imgReInfo = new ImageIcon("src/imges/re_info.png");
 	private ImageIcon imgReProfile = new ImageIcon("src/imges/re_profile.png");
+	private ImageIcon imgCheck = new ImageIcon("src/imges/check.png");
 	//프로필 사진들
 	private ImageIcon userIcon;
 	private Color purple = new Color(82, 12, 139);
@@ -158,7 +160,7 @@ public class MyPage extends CategoryFrame{
 		taste.setText("영화취향: "+user.getUserTaste1());
 		panel.add(taste);
 		
-		//개인정보수정btn
+		//개인정보수정btn 
 		btn_modify_Info.setBounds(POS_X_CENTER + 400, PaddingTop, 200, 50);
 		btn_modify_Info.setIcon(imgReInfo);
 		btn_modify_Info.setBorderPainted(false);
@@ -178,6 +180,13 @@ public class MyPage extends CategoryFrame{
 		record_movieInfo.setBorder(new LineBorder(purple, 1));
 		panel.add(record_movieInfo);
 		
+		//예약 확인
+		btn_my_reservation.setBounds(POS_X_CENTER+205, PaddingTop+307,71,35);
+		btn_my_reservation.setIcon(imgCheck);
+		btn_my_reservation.setBorderPainted(false);
+		btn_my_reservation.addActionListener(new BtnEvent());
+		panel.add(btn_my_reservation);
+		
 		
 		//Panel
 		panel.setBackground(Color.WHITE);
@@ -185,22 +194,7 @@ public class MyPage extends CategoryFrame{
 		panel.setLayout(null);
 		add(panel);
 		
-		
-		/*
-		 * for(int i =0; i<recent_movieInfo[0].length; i++) {
-		 * 
-		 * recent_movieInfo[0][i] = new JLabel(texts[i]);
-		 * panel.add(recent_movieInfo[0][i]);
-		 * recent_movieInfo[0][i].setBounds(POS_X_CENTER - 50+(i*160),
-		 * PaddingTop+300+(250/4)*(1)+3, 150, 250/4);
-		 * recent_movieInfo[0][i].setBorder(new LineBorder(purple, 1));
-		 * recent_movieInfo[0][i].setBorder(new LineBorder(purple, 1));
-		 * recent_movieInfo[0][i].setHorizontalAlignment(JLabel.CENTER);
-		 * recent_movieInfo[0][i].setFont(font2);
-		 * recent_movieInfo[0][i].setBackground(Color.red);
-		 * 
-		 * }
-		 */
+	
 		
 		if(reseravations.size()>0) {
 			int num = reseravations.size();
@@ -210,8 +204,7 @@ public class MyPage extends CategoryFrame{
 			}else{
 				num = reseravations.size()+1;
 			}
-			for(int y=0; y<3; y++) {
-				System.out.println(num);
+			for(int y=0; y<num; y++) {
 				for(int x=0; x<recent_movieInfo[y].length; x++){
 					//기본 설정
 					recent_movieInfo[y][x] = new JLabel("aa");
@@ -263,18 +256,8 @@ public class MyPage extends CategoryFrame{
 					    }else if(x==3) {
 					    	recent_movieInfo[y][x].setText(movieYYMMDD+"\n"+"aa");
 					    }
-					    					    					    
-				    }
-				    
-						
-					
-					/*
-					 * recent_movieInfo[i].setText("<html>"
-					 * +"  예매일: "+yymmdd+"&nbsp;&nbsp;&nbsp;&nbsp;"+
-					 * movieName+"&nbsp;&nbsp;&nbsp;&nbsp;" +seatCount+"</html>" );//+
-					 * "&nbsp;&nbsp;" + country+"&nbsp;&nbsp;"+hall+"</html>");
-					 */				
-				    }
+					}
+				}
 				
 			}
 		}else {
@@ -286,6 +269,7 @@ public class MyPage extends CategoryFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+
 			// TODO Auto-generated method stub
 			if(e.getSource() == btn_modify_Info) {
 				String pw = JOptionPane.showInputDialog(null,"비밀번호를 입력해주세요");
@@ -299,10 +283,13 @@ public class MyPage extends CategoryFrame{
 					
 				}
 				
-			}
-			
+			} 
 			if(e.getSource() == btn_modify_Profile) {
 				new ChangeProfile(user);
+				dispose();
+			} 
+			if(e.getSource() == btn_my_reservation) {
+				new MyReservationPage(user);
 				dispose();
 			}
 		}

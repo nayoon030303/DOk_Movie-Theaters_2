@@ -54,6 +54,12 @@ public class DOKPage extends CategoryFrame {
       //setDefaultCloseOperation(EXIT_ON_CLOSE);
       getContentPane().setLayout(null);//·¹ÀÌ¾Æ¿ô null
       setVisible(true);
+      
+      //Panel
+      add(panel);
+      panel.setBackground(Color.WHITE);
+      panel.setBounds(0,(int) (Main.SCREEN_HEIGHT*0.25),Main.SCREEN_WIDTH,(int)(Main.SCREEN_HEIGHT*0.75));
+      panel.setLayout(null);
      
       
       dailyMovie.start();
@@ -136,11 +142,7 @@ public class DOKPage extends CategoryFrame {
          panel.add(movieName[i]);
       }
 
-      //Panel
-      add(panel);
-      panel.setBackground(Color.WHITE);
-      panel.setBounds(0,(int) (Main.SCREEN_HEIGHT*0.25),Main.SCREEN_WIDTH,(int)(Main.SCREEN_HEIGHT*0.75));
-      panel.setLayout(null);
+      
       
    }
    

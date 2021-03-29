@@ -12,8 +12,9 @@ public class Main {
 		// TODO Auto-generated method stub
 		//new LoadingPage(user);
 		 //new DOKPage(user);
-		new LoginPage();
+		//new MyReservationPage(user);
 		//new ChartPage(user);
+		new LoginPage();
 		//new Reservation_start_page(user);
 	}
 
